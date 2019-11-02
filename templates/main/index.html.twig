@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Les concessionnaires</h1>
+    {% for dealer in dealers %}
+        <div class="card border-primary mb-3">
+            <div class="card-header">
+                {{ dealer.name }}</div>
+            <div class="card-body">
+                <p>
+                    <a href="{{ path('show_dealer', {'id': dealer.id}) }}">Détails</a>
+                </p>
+                <p>
+                    <a href="{{ path('create_car', {'id': dealer.id}) }}">Ajouter une voiture</a>
+
+                </p>
+            </div>
+
+        </div>
+    {% endfor %}
+
+{% endblock %}

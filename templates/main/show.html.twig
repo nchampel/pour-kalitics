@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>{{ dealer.name }}</h1>
+
+    <table border="2" id="my-table">
+        <thead>
+            <tr>
+                <th>Modèle</th>
+                <th>Couleur</th>
+                <th>Nombre de sièges</th>
+                <th>Moteur</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in dealer.cars %}
+
+                <tr>
+                    <td>{{ car.model }}</td>
+
+                    <td>{{ car.color }}</td>
+
+                    <td>{{ car.seats }}</td>
+
+                    <td>
+                        {{ car.engine }}</td>
+
+                    <td>
+                        <a href="{{ path('edit_car' , {'id': car.id}) }}">Editer la voiture</a>
+                        <a href="{{ path('delete_car', {'id': car.id}) }}">Supprimer la voiture</a>
+
+                    </td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('index') }}">Retour aux concessionnaires</a>
+{% endblock %}
