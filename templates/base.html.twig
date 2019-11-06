@@ -24,9 +24,32 @@
 
             <script>
                 $(document).ready(function () {
-                    $('#my-table').DataTable();
+
+
+                    $('#my-table').DataTable({
+                        "ajax": {
+                            url: 'http://localhost:8000/cars',
+
+                            dataSrc: ''
+                        },
+                        "columns": [
+                            {
+                                "data": "model"
+                            }, {
+                                "data": "color"
+                            }, {
+                                "data": "seats"
+                            }, {
+                                "data": "engine"
+                            }
+                        ]
+                    });
+
+
                 });
             </script>
+
+
         {% endblock %}
     </body>
 </html>

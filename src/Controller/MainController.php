@@ -8,6 +8,7 @@ use App\Form\CarType;
 use App\Repository\DealerRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,9 +30,24 @@ class MainController extends AbstractController
      */
     public function show(Dealer $dealer)
     {
+
         return $this->render('main/show.html.twig', [
             'dealer' => $dealer
         ]);
+    }
+
+    /**
+     * @Route("/cars", name="show_cars")
+     */
+    public function showCars()
+    {
+        $cars = $this->getDoctrine()->getRepository(Car::class)
+            ->createQueryBuilder('c')
+            ->select('c')
+            ->getQuery()
+            ->getArrayResult(); // obtenir un tableau associatif au lieu d'une entité
+
+        return new JsonResponse($cars);
     }
 
     /**
